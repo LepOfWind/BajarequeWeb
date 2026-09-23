@@ -209,3 +209,7 @@ img { display: block; max-width: 100%; }
 .galeria-picker img { aspect-ratio: 1; width: 100%; object-fit: contain; background: #fff; }
 pre.salida { background: #111; color: #d8d8d8; padding: 12px; border-radius: 8px; font-size: 12.5px; max-height: 260px; overflow: auto; white-space: pre-wrap; }
 .cargando { opacity: .6; pointer-events: none; }
+
+/* ---------- aviso de cambios en GitHub ---------- */
+.franja { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 10px 28px; background: #e8f0fe; color: #174ea6; border-bottom: 1px solid #c6d7f9; font-size: 14px; font-weight: 500; }
+@media (max-width: 900px) { .franja { padding: 10px 16px; } }

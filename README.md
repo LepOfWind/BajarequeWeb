@@ -71,6 +71,8 @@ Detalles:
 - Las fotos se reducen a 1600 px y se convierten a WebP antes de guardarse en `static/img/`.
 - Antes de cada guardado se crea un respaldo en `datos/respaldos/`. Desde **Respaldos** puedes volver a cualquier versión.
 - Valida antes de guardar: nombres, precios, al menos una foto, WhatsApp con código de país, etc.
+- **Trabajo entre varias computadoras:** al abrirse, el admin descarga de GitHub lo que otra persona haya publicado. Cada 5 minutos (y al volver a la ventana) revisa si hay cambios nuevos y muestra una franja azul con **Actualizar ahora**. Al publicar, primero combina los cambios del otro y luego sube los tuyos. Si los dos editaron lo mismo, avisa y no pierde nada: se resuelve en GitHub Desktop.
+- **Rama:** la tienda se publica desde `main`. Si la carpeta está en otra rama, el admin lo avisa antes de publicar. Para usar otra rama como tienda: `$env:RAMA_TIENDA="mejoras"`.
 - Si el puerto 4321 está ocupado, usa otro. En CMD: `set PUERTO=5000 && node admin.mjs`; en PowerShell: `$env:PUERTO=5000; node admin.mjs`.
 
 ## Cambios a mano (sin el admin)
