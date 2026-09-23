@@ -919,16 +919,76 @@
         botones: [{ texto: 'Entendido', valor: true }]
       });
     }
-    const ok = await confirmar('Publicar en internet', 'Se subirán los cambios guardados. En 1 o 2 minutos se verán en el sitio público.', 'Publicar');
+    const otraRama = estado.rama && estado.ramaTienda && estado.rama !== estado.ramaTienda;
+    const ok = await confirmar('Publicar en internet', otraRama
+      ? `<strong>Atención:</strong> esta carpeta está en la rama <span class="url">${esc(estado.rama)}</span>, no en <span class="url">${esc(estado.ramaTienda)}</span>. Los cambios se subirán a GitHub, pero <strong>no aparecerán en la tienda</strong> hasta unirlos a ${esc(estado.ramaTienda)} (por ejemplo con un Pull Request).`
+      : 'Se subirán los cambios guardados. En 1 o 2 minutos se verán en el sitio público.', 'Publicar');
     if (!ok) return;
     const btn = $('[data-publicar]'); btn.disabled = true; btn.textContent = 'Publicando…';
     try {
       const r = await fetch('/api/publicar', { method: 'POST' });
       const j = await r.json();
-      if (j.ok) avisar(j.sinCambios ? 'No había cambios nuevos para publicar.' : '¡Publicado! En 1–2 minutos estará en línea.', 'ok', 6000);
+      if (j.ok) {
+        avisar(j.sinCambios ? 'No había cambios nuevos para publicar.' : '¡Publicado! En 1–2 minutos estará en línea.', 'ok', 6000);
+        if (j.actualizado) { await cargarDatos(); render(); avisar('También se incluyeron los cambios publicados desde otra computadora.', '', 7000); }
+        $('[data-franja]').hidden = true;
+      } else if (j.conflicto) mostrarConflicto(j.detalle);
       else abrirModal({ titulo: 'No se pudo publicar', cuerpo: `<p>${esc(j.error)}</p><details><summary>Detalle técnico</summary><pre class="salida">${esc(j.detalle || '')}</pre></details>`, botones: [{ texto: 'Cerrar', valor: true }] });
     } catch (e) { avisar('No se pudo publicar: ' + e.message, 'error'); }
     finally { btn.disabled = false; btn.textContent = 'Publicar en internet'; }
+  }
+
+  // ================= sincronización con GitHub =================
+  function mostrarConflicto(detalle) {
+    return abrirModal({
+      titulo: 'No se pudieron combinar los cambios',
+      cuerpo: `<p>Otra persona publicó cambios en <strong>lo mismo</strong> que tú editaste (por ejemplo, el mismo producto) y no se pueden juntar automáticamente.</p>
+        <p><strong>Tu trabajo no se perdió:</strong> quedó guardado en esta computadora.</p>
+        <p class="ayuda">Para resolverlo: abre GitHub Desktop, pulsa <em>Fetch origin → Pull origin</em> y elige qué versión conservar en cada archivo marcado. O pídele ayuda a Luis.</p>
+        <details><summary>Detalle técnico</summary><pre class="salida">${esc(detalle || '')}</pre></details>`,
+      botones: [{ texto: 'Entendido', valor: true }]
+    });
+  }
+
+  function mostrarFranja(nuevos) {
+    $('[data-franja-texto]').textContent = `Hay ${nuevos === 1 ? 'un cambio nuevo publicado' : `${nuevos} cambios nuevos publicados`} desde otra computadora.`;
+    $('[data-franja]').hidden = false;
+  }
+
+  async function revisarGitHub() {
+    try {
+      const j = await (await fetch('/api/sincronizar?revisar=1')).json();
+      if (j.estado === 'hay-nuevos') mostrarFranja(j.nuevos);
+    } catch {}
+  }
+
+  async function actualizarDesdeGitHub() {
+    if (haySinGuardar()) {
+      const ok = await confirmar('Primero guarda', 'Tienes cambios sin guardar. Se guardarán y luego se combinarán con los cambios nuevos.', 'Guardar y actualizar');
+      if (!ok) return;
+      await guardar();
+      if (haySinGuardar()) return;
+    }
+    const btn = $('[data-actualizar]'); btn.disabled = true; btn.textContent = 'Actualizando…';
+    try {
+      const j = await (await fetch('/api/sincronizar', { method: 'POST' })).json();
+      if (j.estado === 'actualizado' || j.estado === 'al-dia') {
+        await cargarDatos(); render();
+        $('[data-franja]').hidden = true;
+        avisar(j.estado === 'actualizado' ? 'Listo: ya tienes la versión más reciente.' : 'Ya tenías la versión más reciente.', 'ok');
+      } else if (j.estado === 'conflicto') mostrarConflicto(j.detalle);
+      else avisar(j.estado === 'sin-conexion' ? 'Sin conexión con GitHub. Intenta más tarde.' : 'No se pudo actualizar: ' + (j.detalle || j.estado), 'error');
+    } catch (e) { avisar('No se pudo actualizar: ' + e.message, 'error'); }
+    finally { btn.disabled = false; btn.textContent = 'Actualizar ahora'; }
+  }
+
+  async function avisosDeArranque() {
+    try {
+      const { ultima } = await (await fetch('/api/sincronizar')).json();
+      if (ultima?.estado === 'actualizado') avisar(`Se descargaron ${ultima.nuevos || ''} cambio(s) publicados desde otra computadora.`.replace('  ', ' '), 'ok', 6000);
+      else if (ultima?.estado === 'conflicto') mostrarConflicto(ultima.detalle);
+      else if (ultima?.estado === 'sin-conexion') avisar('Sin conexión con GitHub: estás trabajando con la versión guardada en esta computadora.', '', 6000);
+    } catch {}
   }
 
   // ================= enrutador =================
@@ -968,7 +1028,11 @@
   window.addEventListener('beforeunload', e => { if (haySinGuardar()) { e.preventDefault(); e.returnValue = ''; } });
   document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); guardar(); } });
 
-  cargarDatos().then(render).catch(() => {
+  $('[data-actualizar]').onclick = actualizarDesdeGitHub;
+  setInterval(revisarGitHub, 5 * 60 * 1000);
+  let ultimaRevision = Date.now();
+  window.addEventListener('focus', () => { if (Date.now() - ultimaRevision > 60000) { ultimaRevision = Date.now(); revisarGitHub(); } });
+  cargarDatos().then(() => { render(); avisosDeArranque(); }).catch(() => {
     document.querySelector('#vista').innerHTML = '<div class="errores">No se pudo conectar con el admin. ¿Está abierta la ventana de <code>node admin.mjs</code>?</div>';
   });
 })();

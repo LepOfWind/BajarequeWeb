@@ -18,6 +18,7 @@ const DIR_MANUALES = join(RAIZ, 'static', 'manuales');
 const DIR_ADMIN = join(RAIZ, 'admin');
 const DIR_SITIO = join(RAIZ, 'sitio');
 const MAX_RESPALDOS = 30;
+const RAMA_TIENDA = process.env.RAMA_TIENDA || 'main';   // la rama que Cloudflare publica como tienda
 
 const TIPOS = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
@@ -135,6 +136,64 @@ function listaRespaldos() {
   return readdirSync(DIR_RESPALDOS).filter(f => /^tienda-\d{8}-\d{6}\.json$/.test(f)).sort().reverse();
 }
 
+// ---------- sincronización con GitHub ----------
+// Antes de trabajar y antes de publicar se traen los cambios que otra persona haya publicado,
+// para que nadie trabaje sobre una versión vieja ni pise el trabajo del otro.
+const git = (...args) => correr('git', args, { timeout: 180000, env: { ...process.env, LC_ALL: 'C', LANG: 'C', GIT_TERMINAL_PROMPT: '0' } });
+const esRepo = () => existsSync(join(RAIZ, '.git'));
+const ahora = () => new Date().toLocaleString('es-PA');
+let cola = Promise.resolve();
+const enCola = fn => { const r = cola.then(fn, fn); cola = r.catch(() => {}); return r; };  // una operación git a la vez
+let ultimaSync = { estado: 'pendiente' };
+
+async function ramaRemota() {
+  const up = await git('rev-parse', '--abbrev-ref', '--symbolic-full-name', '@{u}');
+  if (up.ok && up.salida) return up.salida.split('\n').pop().trim();
+  const rama = await git('rev-parse', '--abbrev-ref', 'HEAD');
+  return `origin/${rama.salida.trim()}`;
+}
+async function hayCambiosLocales() {
+  const r = await git('status', '--porcelain');
+  return r.ok && r.salida.trim().length > 0;
+}
+async function commitLocal(mensaje) {
+  const add = await git('add', '-A');
+  if (!add.ok) return { ok: false, salida: add.salida };
+  if (!(await hayCambiosLocales())) return { ok: true, hubo: false };
+  const c = await git('commit', '-m', mensaje);
+  if (!c.ok) return { ok: false, salida: c.salida };
+  return { ok: true, hubo: true };
+}
+// Revisa si hay cambios nuevos en GitHub (sin aplicarlos).
+async function revisarRemoto() {
+  if (!esRepo()) return { estado: 'sin-git' };
+  if (!(await git('remote')).salida.trim()) return { estado: 'sin-remoto' };
+  const f = await git('fetch', '--quiet', 'origin');
+  if (!f.ok) return { estado: 'sin-conexion', detalle: f.salida };
+  const up = await ramaRemota();
+  if (!(await git('rev-parse', '--verify', '--quiet', up)).ok) return { estado: 'al-dia', nuevos: 0, up };  // la rama aún no existe en GitHub
+  const r = await git('rev-list', '--count', `HEAD..${up}`);
+  if (!r.ok) return { estado: 'error', detalle: r.salida };
+  const nuevos = parseInt(r.salida, 10) || 0;
+  return { estado: nuevos ? 'hay-nuevos' : 'al-dia', nuevos, up };
+}
+// Trae y aplica los cambios de GitHub. Si hay trabajo local sin publicar, primero lo guarda en un commit local.
+async function traerCambios() {
+  const rev = await revisarRemoto();
+  if (rev.estado !== 'hay-nuevos') return rev;
+  if (await hayCambiosLocales()) {
+    const c = await commitLocal(`Cambios desde el admin (${ahora()})`);
+    if (!c.ok) return { estado: 'error', detalle: c.salida };
+  }
+  const rb = await git('rebase', rev.up);
+  if (!rb.ok) {
+    const abort = await git('rebase', '--abort');
+    return { estado: 'conflicto', detalle: `${rb.salida}\n${abort.salida}`.trim() };
+  }
+  await regenerar();
+  return { estado: 'actualizado', nuevos: rev.nuevos };
+}
+
 // ---------- API ----------
 async function api(req, res, url) {
   const ruta = url.pathname;
@@ -190,26 +249,49 @@ async function api(req, res, url) {
     return enviar(res, 200, { ok: build.ok, build: build.salida });
   }
 
+  if (req.method === 'GET' && ruta === '/api/sincronizar') {
+    if (url.searchParams.has('revisar')) return enviar(res, 200, { ...(await enCola(revisarRemoto)), ultima: ultimaSync });
+    return enviar(res, 200, { ultima: ultimaSync });
+  }
+
+  if (req.method === 'POST' && ruta === '/api/sincronizar') {
+    const r = await enCola(traerCambios);
+    ultimaSync = { ...r, cuando: ahora() };
+    return enviar(res, 200, r);
+  }
+
   if (req.method === 'GET' && ruta === '/api/publicar') {
-    const esGit = existsSync(join(RAIZ, '.git'));
-    if (!esGit) return enviar(res, 200, { git: false });
-    const estado = await correr('git', ['status', '--porcelain']);
-    const remoto = await correr('git', ['remote']);
-    return enviar(res, 200, { git: true, remoto: !!remoto.salida, pendientes: estado.ok ? estado.salida.split('\n').filter(Boolean).length : null });
+    if (!esRepo()) return enviar(res, 200, { git: false });
+    const remoto = await git('remote');
+    const rama = (await git('rev-parse', '--abbrev-ref', 'HEAD')).salida.trim();
+    return enviar(res, 200, { git: true, remoto: !!remoto.salida.trim(), rama, ramaTienda: RAMA_TIENDA });
   }
 
   if (req.method === 'POST' && ruta === '/api/publicar') {
-    if (!existsSync(join(RAIZ, '.git'))) return enviar(res, 400, { ok: false, error: 'Esta carpeta todavía no está conectada a GitHub. Ver README → Publicar.' });
-    const pasos = [];
-    const add = await correr('git', ['add', '-A']); pasos.push(add.salida);
-    if (!add.ok) return enviar(res, 500, { ok: false, error: 'git add falló', detalle: pasos.join('\n') });
-    const commit = await correr('git', ['commit', '-m', `Actualización desde el admin (${new Date().toLocaleString('es-PA')})`]);
-    pasos.push(commit.salida);
-    const nadaQueSubir = !commit.ok && /nothing to commit|nada para hacer commit/i.test(commit.salida);
-    if (!commit.ok && !nadaQueSubir) return enviar(res, 500, { ok: false, error: 'No se pudo crear el commit.', detalle: pasos.join('\n') });
-    const push = await correr('git', ['push'], { timeout: 180000 }); pasos.push(push.salida);
-    if (!push.ok) return enviar(res, 500, { ok: false, error: 'No se pudo subir a GitHub (git push). Revisa tu conexión o credenciales.', detalle: pasos.join('\n') });
-    return enviar(res, 200, { ok: true, sinCambios: nadaQueSubir, detalle: pasos.join('\n') });
+    if (!esRepo()) return enviar(res, 400, { ok: false, error: 'Esta carpeta todavía no está conectada a GitHub. Ver README → Publicar.' });
+    const r = await enCola(async () => {
+      const c = await commitLocal(`Actualización desde el admin (${ahora()})`);
+      if (!c.ok) return { ok: false, error: 'No se pudo crear el commit.', detalle: c.salida };
+      let actualizado = false;
+      for (let intento = 1; intento <= 2; intento++) {
+        const t = await traerCambios();
+        if (t.estado === 'conflicto') return { ok: false, conflicto: true, error: 'Otra persona publicó cambios en lo mismo que tú y no se pudieron combinar automáticamente.', detalle: t.detalle };
+        if (t.estado === 'sin-conexion') return { ok: false, error: 'No hay conexión con GitHub. Revisa tu internet e intenta de nuevo.', detalle: t.detalle };
+        if (t.estado === 'error') return { ok: false, error: 'No se pudo revisar GitHub.', detalle: t.detalle };
+        if (t.estado === 'actualizado') actualizado = true;
+        const cuenta = await git('rev-list', '--count', `${await ramaRemota()}..HEAD`);
+        const adelante = !cuenta.ok || (parseInt(cuenta.salida, 10) || 0) > 0;
+        if (!adelante && !c.hubo && !actualizado) return { ok: true, sinCambios: true };
+        const push = await git('push', '-u', 'origin', 'HEAD');
+        if (push.ok) return { ok: true, actualizado, detalle: push.salida };
+        if (intento === 2 || !/rejected|fetch first|non-fast-forward/i.test(push.salida)) {
+          return { ok: false, error: 'No se pudo subir a GitHub (git push). Revisa tu conexión o que tu cuenta tenga permiso en el repositorio.', detalle: push.salida };
+        }
+        // Alguien publicó justo en este momento: se traen sus cambios y se reintenta.
+      }
+    });
+    if (r.actualizado) ultimaSync = { estado: 'actualizado', cuando: ahora() };
+    return enviar(res, r.ok ? 200 : 500, r);
   }
 
   return enviar(res, 404, { ok: false, error: 'Ruta desconocida' });
@@ -264,6 +346,21 @@ servidor.on('error', e => {
 });
 
 servidor.listen(PUERTO, HOST, async () => {
+  if (esRepo()) {
+    console.log('\n  Buscando cambios nuevos en GitHub…');
+    const r = await enCola(traerCambios);
+    ultimaSync = { ...r, cuando: ahora() };
+    const mensajes = {
+      'al-dia': '  ✔ Tienes la versión más reciente.',
+      'actualizado': `  ✔ Se descargaron ${r.nuevos} cambio(s) publicados desde otra computadora.`,
+      'sin-conexion': '  ⚠ Sin conexión con GitHub: trabajarás con la versión que tienes en esta PC.',
+      'conflicto': '  ✖ Hay cambios que no se pudieron combinar automáticamente (ver el aviso en el admin).',
+      'sin-remoto': '  ⚠ La carpeta no está conectada a GitHub.'
+    };
+    console.log(mensajes[r.estado] || `  ⚠ No se pudo revisar GitHub: ${r.detalle || r.estado}`);
+    const rama = (await git('rev-parse', '--abbrev-ref', 'HEAD')).salida.trim();
+    if (rama && rama !== RAMA_TIENDA) console.log(`  ⚠ Estás en la rama "${rama}". Lo que publiques NO aparece en la tienda hasta unirlo a "${RAMA_TIENDA}".`);
+  }
   if (!existsSync(join(DIR_SITIO, 'index.html'))) await regenerar();
   const url = `http://localhost:${PUERTO}/admin/`;
   console.log(`\n  Admin de Bajareque Outdoor listo`);
