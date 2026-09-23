@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin – Bajareque Outdoor</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/admin/admin.css">
+<script src="/admin/admin.js" defer></script>
+</head>
+<body>
+<div class="app">
+  <aside class="lateral">
+    <div class="marca">
+      <span class="marca__logo">B</span>
+      <div><strong>Bajareque Outdoor</strong><small>Administración</small></div>
+    </div>
+    <nav class="menu" aria-label="Secciones">
+      <a href="#productos" data-seccion="productos"><span aria-hidden="true">▦</span> Productos</a>
+      <a href="#colecciones" data-seccion="colecciones"><span aria-hidden="true">▤</span> Colecciones</a>
+      <a href="#articulos" data-seccion="articulos"><span aria-hidden="true">✎</span> Artículos</a>
+      <a href="#portada" data-seccion="portada"><span aria-hidden="true">⌂</span> Página de inicio</a>
+      <a href="#config" data-seccion="config"><span aria-hidden="true">⚙</span> Datos de la tienda</a>
+      <a href="#respaldos" data-seccion="respaldos"><span aria-hidden="true">↺</span> Respaldos</a>
+    </nav>
+    <div class="lateral__pie">
+      <a class="btn btn--linea btn--bloque" href="/" target="_blank" rel="noopener">Ver sitio ↗</a>
+      <p class="ayuda">Esta ventana solo funciona en esta computadora mientras el admin esté abierto.</p>
+    </div>
+  </aside>
+
+  <div class="principal">
+    <header class="barra">
+      <div class="barra__estado" data-estado>Cargando…</div>
+      <div class="barra__acciones">
+        <button class="btn btn--linea" data-descartar hidden>Descartar cambios</button>
+        <button class="btn" data-guardar disabled>Guardar cambios</button>
+        <button class="btn btn--verde" data-publicar title="Sube los cambios guardados a internet">Publicar en internet</button>
+      </div>
+    </header>
+    <main id="vista" class="vista" tabindex="-1"></main>
+  </div>
+</div>
+
+<div class="avisos" data-avisos aria-live="polite"></div>
+<dialog class="modal" data-modal></dialog>
+<input type="file" data-subir-img accept="image/jpeg,image/png,image/webp,image/gif" multiple hidden>
+<input type="file" data-subir-pdf accept="application/pdf" hidden>
+</body>
+</html>

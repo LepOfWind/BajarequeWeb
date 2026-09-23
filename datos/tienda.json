@@ -1,0 +1,161 @@
+{
+  "tienda": {
+    "nombre": "Bajareque Outdoor",
+    "descripcion": "Ventiladores portátiles, linternas frontales, de área y multifuncionales Claymore en Panamá.",
+    "dominio": "https://bajarequeoutdoor.com",
+    "whatsapp": "50769293426",
+    "correo": "",
+    "moneda": "$",
+    "instagram": "",
+    "facebook": ""
+  },
+  "cdn": {
+    "files": "https://cdn.shopify.com/s/files/1/0708/7518/5217/files/",
+    "articles": "https://cdn.shopify.com/s/files/1/0708/7518/5217/articles/"
+  },
+  "inicio": {
+    "hero": {
+      "titulo": "Explora nuestros productos",
+      "boton": "Ver todo",
+      "enlace": "/collections/all/",
+      "imagenes": ["IMG_8634.jpg", "IMG_8594.jpg"]
+    },
+    "categorias": [
+      { "coleccion": "ventiladores", "imagen": "HANDYA_01_d7a3b394-4843-4a58-b688-9c315ec81604.webp" },
+      { "coleccion": "linternas-frontales", "imagen": "HEADY_R_02.webp" },
+      { "coleccion": "linternas", "imagen": "ULTRA-MINI_17.webp" },
+      { "coleccion": "linternas-multifuncionales", "imagen": "CAPON80C_BK_01.webp" },
+      { "coleccion": "accesorios", "imagen": "WEARABLE-KIT_09.webp" }
+    ],
+    "destacados": ["heady-r", "heady-2", "3face-mini", "handy-a", "clip-fan", "capon-80c", "capon-200h", "capon-120h", "abanico-claymore-v600"]
+  },
+  "colecciones": [
+    { "handle": "ventiladores", "titulo": "Ventiladores", "productos": ["handy-a", "clip-fan", "clip-fan-s", "abanico-claymore-v600"] },
+    { "handle": "linternas-frontales", "titulo": "Linternas Frontales", "productos": ["heady-r", "heady-2"] },
+    { "handle": "linternas", "titulo": "Linternas de Área", "productos": ["ultra-mini", "3face-mini"] },
+    { "handle": "linternas-multifuncionales", "titulo": "Linternas Multifuncionales", "productos": ["capon-80c", "capon-120h", "capon-200h"] },
+    { "handle": "accesorios", "titulo": "Accesorios", "productos": ["wearable-kit", "magneto-de-neodymium"] }
+  ],
+  "productos": [
+    {
+      "handle": "clip-fan-s",
+      "titulo": "Clip Fan S",
+      "precio": 30,
+      "disponible": true,
+      "imagenes": ["ClipFanS4.webp", "ClipFanS3.webp", "ClipFanS2.webp", "ClipFanS1.webp"],
+      "descripcion": "<p>Clip Fan S combina un diseño ultradelgado con un rendimiento potente.</p><p>Disfrute de una brisa refrescante con velocidades de viento de hasta 8 m/s, impulsado por un motor BLDC de alta eficiencia que lo mantiene fresco en cualquier momento y en cualquier lugar.</p><p>Y la batería de 5.000 mAh ofrece un tiempo de ejecución prolongado para un uso durante todo el día.</p><p>Con un peso de solo 180 g, su construcción ultraligera y su diseño de ángulo optimizado garantizan tanto la portabilidad como la comodidad durante todo el día. Con su versátil funcionalidad de 3 vías (de pie, transporte o clip), se adapta perfectamente a su rutina diaria, desplazamientos y actividades al aire libre.</p><h3>Características clave</h3><ul><li>Batería de iones de litio de 5.000 mAh / Hasta 29 horas de tiempo de ejecución</li><li>Diseño con clip para pantalones, cinturones o correas de mochila</li><li>Incluye correa para el cuello desmontable para usar con las manos libres</li><li>Control de velocidad del viento de 4 pasos con una brisa suave y refrescante</li><li>Ultraligero a 180 g (excepto Clip) para una portabilidad máxima</li></ul><h3>Especificaciones</h3><ul><li>Batería: 5,000 mAh @3.7V</li><li>Duración batería: 3 - 29 Hrs</li><li>Carga batería: 3.5 Hrs</li><li>Tamaño: 75 x 3.5 x 124 mm</li><li>Peso: 180 g</li><li>Indicador de batería</li><li>Incluye colgante, cable para cargar USB Tipo C</li></ul>"
+    },
+    {
+      "handle": "ultra-mini",
+      "titulo": "Ultra Mini",
+      "precio": 40,
+      "disponible": true,
+      "imagenes": ["ULTRA-MINI_17.webp", "ULTRA-MINI_15.webp", "ULTRA-MINI_21.webp", "ULTRA-MINI_19.webp", "ULTRA-MINI_20.webp"],
+      "descripcion": "<p>La ULTRA MINI, con un peso sorprendentemente ligero de tan solo 115 g, ofrece una iluminación duradera de hasta 24 horas gracias a su batería de 3500 mAh. Con una potencia de hasta 500 lúmenes, cuenta con tres ajustes de temperatura de color para una iluminación personalizada. Su diseño compacto facilita su almacenamiento y transporte. Esta combinación de tamaño, potencia y versatilidad convierte a la ULTRA MINI en una herramienta de iluminación práctica para diversas situaciones.</p><h3>Especificaciones</h3><ul><li>Brillo: 30 - 500 Lúmenes</li><li>LED:<ul><li>Blanco frío (6,500K)</li><li>Blanco natural (4,200K)</li><li>Blanco cálido (3,000K)</li></ul></li><li>Modos:<ul><li>SOS</li></ul></li><li>Distancia del haz de luz: 7 - 105 metros</li><li>Batería: 3,500 mAh @3.6V</li><li>Duración batería: 6 - 24 Hrs</li><li>Carga batería: 6.5 Hrs</li><li>Resistencia al agua: IP64</li><li>Tamaño: 85 x 66 x 27 mm</li><li>Peso: 115 g</li><li>Indicador de batería</li><li>Función de atenuación de brillo</li><li>USB Tipo A para cargar: 5V 1A</li><li>Incluye 2 ganchos, cable para cargar USB Tipo C y estuche</li></ul>"
+    },
+    {
+      "handle": "magneto-de-neodymium",
+      "titulo": "Magneto de Neodymium",
+      "precio": 12,
+      "disponible": true,
+      "imagenes": ["NEODYUM-MAGNET_01.webp", "NEODYMIUM-MAGNET_03.webp", "NEODYUM-MAGNET_02.webp"],
+      "descripcion": "<p>Magneto con el que se puede accesorizar productos como el 3Face Mini, V600+ y Heady+ R por medio del socket 1/4” que incluyen estos productos.</p>"
+    },
+    {
+      "handle": "wearable-kit",
+      "titulo": "Wearable Kit",
+      "precio": 12,
+      "disponible": true,
+      "imagenes": ["WEARABLE-KIT_09.webp", "WEARABLE-KIT_01.webp", "WEARABLE-KIT_03.webp", "WEARABLE-KIT_05_e047596b-0f99-4504-9c26-ac2b72c4b35a.webp", "WEARABLE-KIT_10.webp"],
+      "descripcion": "<p>Accesorio para utilizar la serie Capon y se puede utilizar como Linterna Frontal.</p><p>Compatible con:</p><ul><li>Capon 80C</li><li>Capon 120H</li></ul>"
+    },
+    {
+      "handle": "heady-r",
+      "titulo": "Heady+ R",
+      "precio": 60,
+      "disponible": true,
+      "imagenes": ["HEADY_R_02.webp", "HEADY_R_01.webp", "HEADY_R_06.webp", "HEADY_R_07.webp", "HEADY_R_08.webp", "HEADY_R_10.webp"],
+      "descripcion": "<p>La HEADY+ R, que incluye luz roja, está diseñada para usos específicos como preservar la visión nocturna o minimizar el deslumbramiento. Ofrece cinco modos de iluminación, un clip y un gancho integrado, lo que la hace adaptable a cualquier entorno. Es una opción ideal para astronomía, observación de vida silvestre o situaciones que requieren una iluminación menos intrusiva.</p><h3>Especificaciones</h3><ul><li>Brillo: 10 - 600 Lúmenes</li><li>LED:<ul><li>Blanco frío (6,200K)</li><li>Rojo</li></ul></li><li>Modos:<ul><li>Enfocado (8°)</li><li>Enfocado (25°)</li><li>Turbo</li><li>Ampliado (Flood)</li><li>SOS</li></ul></li><li>Distancia del haz de luz: 3 - 90 metros - Turbo: 5 - 150 metros</li><li>Batería: 3,500 mAh @3.6V</li><li>Duración batería: 4 - 90 Hrs - Turbo: 4 - 40 Hrs</li><li>Carga batería: 6 Hrs</li><li>Resistencia al agua: IP54</li><li>Tamaño: 74 x 44 x 44 mm</li><li>Peso: 103 g</li><li>Indicador de batería</li><li>Modo bloqueo</li><li>Función de atenuación de brillo</li><li>Incluye banda para cabeza, cable para cargar USB Tipo C y estuche</li></ul>"
+    },
+    {
+      "handle": "heady-2",
+      "titulo": "Heady 2",
+      "precio": 30,
+      "disponible": true,
+      "imagenes": ["HEADY2_10.webp", "HEADY2_01.webp", "HEADY2_06_ad3de511-ca2e-4f66-868c-50a011404179.webp", "HEADY2_07.webp", "HEADY2_08_ae217aaf-6b4e-48e0-8975-aea1af5c04ff.webp"],
+      "descripcion": "<p>La HEADY2 es una linterna frontal potente y compacta, ideal para actividades al aire libre informales. Ofrece tres modos de iluminación, un clip y un gancho integrado, lo que la hace adaptable a cualquier entorno.</p><p>Esta linterna frontal está diseñada para ofrecer durabilidad y rendimiento, garantizando una iluminación fiable allá donde te lleven tus aventuras. Con su batería recargable, múltiples opciones de montaje y ángulo ajustable, la HEADY2 es la compañera perfecta para todas tus actividades al aire libre.</p><ul><li>Recargable USB Tipo C</li><li>Compacta y liviana</li><li>Varias opciones de montaje</li><li>Ajustable con varios ángulos hasta 90°</li></ul><h3>Especificaciones</h3><ul><li>Brillo: 5 - 350 Lúmenes</li><li>LED:<ul><li>Blanco frío (6,200K)</li><li>Blanco cálido (3,000K)</li></ul></li><li>Modos:<ul><li>Enfocado</li><li>Ampliado (Flood)</li><li>SOS</li></ul></li><li>Distancia del haz de luz: 3 - 80 metros</li><li>Batería: 1,200 mAh @3.7V</li><li>Duración batería: 3.5 - 40 Hrs</li><li>Carga batería: 2 Hrs</li><li>Resistencia al agua: IP54</li><li>Tamaño: 60 x 40 x 40 mm</li><li>Peso: 58 g</li><li>Indicador de batería</li><li>Función de atenuación de brillo</li><li>Incluye banda para la cabeza, cable para cargar USB Tipo C y estuche</li></ul>"
+    },
+    {
+      "handle": "handy-a",
+      "titulo": "Handy A",
+      "precio": 30,
+      "disponible": true,
+      "manuales": [{ "titulo": "Manual de usuario (inglés)", "archivo": "handy-a-manual.pdf" }],
+      "imagenes": ["HANDYA_01_d7a3b394-4843-4a58-b688-9c315ec81604.webp", "HANDYA_08_18de21b6-d13e-4818-8b91-30f52f0722e2.webp", "HANDYA_10_1c78059a-2bc6-4d60-b531-fb5c1407f735.webp", "HANDYA_10-1_9734cd3e-8fd5-42a1-8a89-29fedcbbcf4f.webp", "HANDYA_14_21095e5a-2400-4346-9394-11903328dba6.webp"],
+      "descripcion": "<p>Este ventilador portátil personal está diseñado para brindarte una experiencia única en cuanto a refrigeración, funcionalidad, comodidad y estilo. El ventilador HANDY A funciona como un ventilador de mano portátil y se pliega para convertirse en un ventilador de escritorio. Con sus prácticas correas de mano, podrás disfrutar de aire fresco dondequiera que vayas. También puedes usarlo como batería externa. HANDY A es tu herramienta de refrigeración ideal para cualquier clima cálido.</p><h3>Especificaciones</h3><ul><li>Batería: 4,900 mAh @3.6V</li><li>Duración batería: 3 - 10 Hrs</li><li>Carga batería: 3.3 Hrs</li><li>Tamaño: 170 x 43 x 290 mm</li><li>Peso: 270 g</li><li>Indicador de batería</li><li>Función batería portátil</li><li>Puerto para cargar USB A: 5V 2A</li><li>Incluye muñequera, cable para cargar USB Tipo C</li></ul>"
+    },
+    {
+      "handle": "clip-fan",
+      "titulo": "Clip Fan",
+      "precio": 25,
+      "disponible": true,
+      "imagenes": ["clipfan_thum_06_985e47c8-4ad3-4c1b-8a91-1d68b506f125.webp", "clipfan_thum_08.webp", "IMG_8596.jpg", "IMG_8600.jpg", "CD1A255A-8AA5-4606-9503-81CE42A99E03.jpg"],
+      "descripcion": "<p>El ventilador portátil CLAYMORE Clip Fan es compacto, versátil, recargable y gracias a su diseño portátil con clip, puedes sujetarlo de forma segura a tus pantalones, cinturón o correa de mochila, mientras que la correa para el cuello incluida te permite llevarlo cómodamente alrededor del cuello o sobre el hombro de un niño.</p><p>Con 4 niveles de velocidad, el Clip Fan proporciona un flujo de aire suave pero refrescante que te mantiene fresco dondequiera que vayas. Con un peso de tan solo 270 g, es ultraligero y fácil de transportar, lo que lo hace ideal para ir al trabajo, hacer senderismo, acampar o para el uso diario. La carga rápida y confiable mediante USB Tipo-C garantiza que siempre estés listo para refrescarte.</p><ul><li>Recargable USB Tipo C</li><li>Diseño con clip para pantalones, cinturones o mochilas</li><li>Ultra liviano con 270 g para portabilidad máxima</li></ul><h3>Especificaciones</h3><ul><li>Batería: 5,200 mAh @3.7V</li><li>Duración batería: 2 - 17 Hrs</li><li>Carga batería: 4 Hrs</li><li>Tamaño: 87 x 56.5 x 123 mm</li><li>Peso: 270 g</li><li>Indicador de batería</li><li>Incluye colgante, cable para cargar USB Tipo C</li></ul>"
+    },
+    {
+      "handle": "3face-mini",
+      "titulo": "3Face Mini",
+      "precio": 65,
+      "disponible": true,
+      "imagenes": ["3FACE-MINI_21.webp", "3FACE-MINI_22.webp", "3FACE-MINI_23.webp", "3FACE-MINI_27.webp", "3facemini_dk_09.webp"],
+      "descripcion": "<p>El 3FACE MINI combina un diseño compacto con una potente funcionalidad. Su iluminación tridimensional ofrece una amplia cobertura, también funciona como batería externa. Personaliza el ambiente con tres colores de luz. Con tan solo 159 g de peso, es ultraligera y perfecta para llevarla a todas partes. Ideal para espacios reducidos, la 3FACE MINI es una solución de iluminación portátil y dinámica.</p><ul><li>Recargable con USB Tipo C</li><li>Ultra liviano - 159 g</li><li>Ángulo de iluminación 3D</li><li>Función como batería portátil</li><li>Socket 1/4” para atornillar</li></ul><h3>Especificaciones</h3><ul><li>Brillo: 80 - 800 Lúmenes</li><li>LED:<ul><li>Blanco frío (6,500K)</li><li>Blanco natural (4,200K)</li><li>Blanco cálido (3,000K)</li></ul></li><li>Modos:<ul><li>Centro</li><li>Laterales</li><li>SOS</li></ul></li><li>Distancia del haz de luz: 7 - 105 metros</li><li>Batería: 5,000 mAh @3.7V</li><li>Duración batería: 6.5 - 60 Hrs</li><li>Carga batería: 2.7 Hrs</li><li>Resistencia al agua: IP54</li><li>Tamaño: 78 x 103 x 20 mm</li><li>Peso: 159 g</li><li>Indicador de batería</li><li>Función de atenuación de brillo</li><li>USB Tipo A para cargar: 5V 2A</li><li>Incluye 2 ganchos, cable para cargar USB Tipo C y estuche</li></ul>"
+    },
+    {
+      "handle": "capon-200h",
+      "titulo": "Capon 200H",
+      "precio": 45,
+      "disponible": true,
+      "imagenes": ["CAPON200H_02.webp", "CAPON200H_10.webp", "CAPON200H_03.webp", "CAPON200H_08.webp", "CAPON200H_11.webp"],
+      "descripcion": "<p>El CAPON 200H, diseñado para uso profesional, hace uso de una resistente carcasa de policarbonato. Su clip más ancho y robusto garantiza una sujeción segura, lo que la hace ideal para expertos que necesitan una iluminación fiable y de alto rendimiento en condiciones exigentes.</p><ul><li>Recargable mediante USB Tipo C</li><li>Sensor de movimiento de encendido/apagado</li><li>3 modos de luz</li><li>Gancho fácil de enganchar/colgar</li><li>Ángulo ajustable hasta 180°</li></ul><h3>Especificaciones</h3><ul><li>Brillo: 30 - 1000 Lúmenes</li><li>LED:<ul><li>Blanco frío (5,700K)</li></ul></li><li>Modos:<ul><li>Enfocado</li><li>Enfocado (Turbo)</li><li>Ampliado (Flood)</li><li>SOS</li></ul></li><li>Distancia del haz de luz: 7 - 105 metros</li><li>Batería: 2,000 mAh @3.7V</li><li>Duración batería: 3 - 55 Hrs</li><li>Carga batería: 4 Hrs</li><li>Resistencia al agua: IP54</li><li>Tamaño: 67 x 58 x 36 mm</li><li>Peso: 85 g</li><li>Indicador de batería</li><li>Sensor de movimiento</li><li>Función de atenuación de brillo</li><li>Incluye gancho, cable para cargar USB Tipo C y estuche</li></ul>"
+    },
+    {
+      "handle": "capon-120h",
+      "titulo": "Capon 120H",
+      "precio": 35,
+      "disponible": true,
+      "imagenes": ["CAPON120H_BK_01.webp", "CAPON120H_BK_02.webp", "CAPON120H_BK_03.webp", "CAPON120H_BK_06.webp", "CAPON120H_BK_09.webp"],
+      "descripcion": "<p>El CAPON 120H, con su brillo máximo mejorado, es ideal para entornos exigentes que requieren una iluminación potente y fiable. Es perfecta para actividades extremas al aire libre, trabajos industriales y diversas tareas, ofreciendo una iluminación robusta y eficaz.</p><ul><li>Recargable mediante USB Tipo C</li><li>Sensor de movimiento de encendido/apagado</li><li>3 modos de luz</li><li>Gancho fácil de enganchar/colgar</li><li>Ángulo ajustable hasta 180°</li></ul><h3>Especificaciones</h3><ul><li>Brillo: 1 - 500 Lúmenes</li><li>LED:<ul><li>Blanco frío (5,700K)</li><li>Rojo</li></ul></li><li>Modos:<ul><li>Enfocado</li><li>Difuso (Rojo)</li><li>Ampliado (Flood)</li><li>SOS</li></ul></li><li>Distancia del haz de luz: 8 - 105 metros</li><li>Batería: 1,200 mAh @3.7V</li><li>Duración batería: 2 - 90 Hrs</li><li>Carga batería: 2 Hrs</li><li>Resistencia al agua: IP54</li><li>Tamaño: 57 x 55 x 35 mm</li><li>Peso: 59 g</li><li>Indicador de batería</li><li>Sensor de movimiento</li><li>Función de atenuación de brillo</li><li>Incluye gancho, cable para cargar USB Tipo C y estuche</li></ul>"
+    },
+    {
+      "handle": "capon-80c",
+      "titulo": "Capon 80C",
+      "precio": 30,
+      "disponible": true,
+      "imagenes": ["CAPON80C_BK_01.webp", "CAPON80C_BK_02.webp", "CAPON80C_BK_03.webp", "CAPON80C_BK_07.webp"],
+      "descripcion": "<p>El CAPON 80C, equipado con un sensor de movimiento de encendido/apagado, facilita su uso incluso con guantes. Con 3 modos de iluminación, ajuste de ángulo de hasta 180° y versátiles opciones de sujeción y montaje, es una herramienta práctica para entornos dinámicos.</p><ul><li>Recargable mediante USB Tipo C</li><li>Sensor de movimiento de encendido/apagado</li><li>3 modos de luz</li><li>Gancho fácil de enganchar/colgar</li><li>Ángulo ajustable hasta 180°</li></ul><h3>Especificaciones</h3><ul><li>Brillo: 1 - 280 Lúmenes</li><li>LED:<ul><li>Blanco frío (5,700K)</li><li>Rojo</li></ul></li><li>Modos:<ul><li>Enfocado</li><li>Difuso (Rojo)</li><li>Ampliado (Flood)</li><li>SOS</li></ul></li><li>Distancia del haz de luz: 8 - 75 metros</li><li>Batería: 800 mAh @3.7V</li><li>Duración batería: 3 - 60 Hrs</li><li>Carga batería: 1.3 Hrs</li><li>Resistencia al agua: IP54</li><li>Tamaño: 51 x 50 x 30 mm</li><li>Peso: 43 g</li><li>Indicador de batería</li><li>Sensor de movimiento</li><li>Función de atenuación de brillo</li><li>Incluye gancho, cable para cargar USB Tipo C y estuche</li></ul>"
+    },
+    {
+      "handle": "abanico-claymore-v600",
+      "titulo": "V600+",
+      "precio": 60,
+      "disponible": true,
+      "opcion": "Color",
+      "variantes": [
+        { "nombre": "Gris", "precio": 60, "disponible": true, "imagen": "V600__WG_01.webp" },
+        { "nombre": "Negro", "precio": 60, "disponible": true, "imagen": "prism_2411040326.webp" }
+      ],
+      "imagenes": ["V600__WG_01.webp", "V600__WG_06.webp", "V600__WG_07.webp", "V600__WG_09.webp", "V600__WG_08.webp", "prism_2411040326.webp"],
+      "descripcion": "<p>El CLAYMORE V600+ es un versátil ventilador circulador de aire inalámbrico. Cuenta con 4 niveles de velocidad del viento y una jaula de seguridad desmontable para facilitar la limpieza, garantiza comodidad y funcionalidad. Optimizado para su portabilidad gracias a su asa integrada, también ofrece un uso flexible gracias a su trípode y un orificio para tornillos de 1/4\" para diversas opciones de montaje.</p><ul><li>Recargable mediante USB Tipo C</li><li>Rejilla de seguridad extraíble para facilitar la limpieza</li><li>4 velocidades / Temporizador de 1 a 4 horas</li><li>Varias opciones de montaje</li></ul><h3>Especificaciones</h3><ul><li>Temporizador: 1 - 4 Hrs</li><li>Máximo flujo de aire: 5.8 m/s</li><li>Velocidad: 4 velocidades</li><li>Batería: 7,800 mAh @3.6V</li><li>Duración batería: 7 - 32 Hrs</li><li>Carga de batería: 6.5 Hrs</li><li>Tamaño: 243 x 226 x 350 mm</li><li>Peso: 600 g</li><li>Indicador de batería</li><li>Incluye trípode, cable para cargar USB Tipo C y estuche</li></ul>"
+    }
+  ],
+  "articulos": [
+    {
+      "handle": "cuando-la-calidad-va-de-primero",
+      "titulo": "Cuando la calidad va de primero",
+      "fecha": "2026-04-06",
+      "imagen": "articles/Articulo_1_d8c4a994-a9c8-4d3e-ad1d-02f73721cb92.jpg",
+      "resumen": "Claymore: Tecnología outdoor que realmente marca la diferencia. En el mundo del camping, hiking y outdoor urbano, no todos los productos son iguales.",
+      "contenido": "<h2>Claymore: Tecnología outdoor que realmente marca la diferencia</h2><p>En el mundo del camping, hiking y outdoor urbano, no todos los productos son iguales. Claymore se ha posicionado como una marca premium especializada en <strong>ventiladores portátiles y linternas vestibles</strong>, destacando por su calidad, diseño y rendimiento real.</p><p>Más que accesorios, sus productos están diseñados para acompañarte en cualquier situación: desde una aventura al aire libre hasta el uso diario o profesional.</p><h3>Ventiladores Claymore: potencia, autonomía y silencio</h3><p>Los ventiladores Claymore no son simples dispositivos portátiles. Están diseñados para ofrecer <strong>alto rendimiento en cualquier entorno</strong>.</p><ul><li>Baterías de alta capacidad para largas horas de uso</li><li>Flujo de aire potente y constante</li><li>Funcionamiento silencioso</li><li>Diseño portátil con múltiples formas de uso (mesa, colgado, trípode)</li></ul><p>Esto los convierte en una opción ideal para camping, viajes, uso en el auto o incluso cortes de energía.</p><h3>Linternas vestibles: versatilidad total</h3><p>Las linternas Claymore, como la serie HEADY, redefinen lo que puede hacer una luz portátil.</p><ul><li>Alta potencia de iluminación</li><li>Diferentes modos de luz (focal, ambiental, combinado)</li><li>Uso como linterna frontal, de mano o fija</li><li>Diseño compacto, resistente y cómodo</li></ul><p>Un solo producto que se adapta a múltiples escenarios.</p><h3>¿Por qué elegir Claymore sobre opciones más económicas?</h3><p>Aunque existen alternativas más baratas en el mercado, la diferencia con Claymore es evidente:</p><ul><li><strong>Mayor duración de batería</strong></li><li><strong>Mejor calidad de materiales</strong></li><li><strong>Funcionamiento más silencioso y eficiente</strong></li><li><strong>Diseño multifuncional</strong></li></ul><p>Mientras otros productos cumplen una función básica, Claymore ofrece una experiencia <strong>completa y confiable</strong>.</p><h3>Diseño y reconocimiento internacional</h3><p><img src=\"{{img:IMG_8634.jpg}}\" alt=\"Productos Claymore\"></p><p>Los productos Claymore han sido reconocidos por su innovación y diseño, combinando estética moderna con funcionalidad real.</p><p>No es solo cómo se ven, sino cómo funcionan en condiciones reales.</p><p>Claymore no busca ser la opción más económica, sino la más confiable.</p><p>Si valoras la calidad, la durabilidad y la versatilidad, es una inversión que marca la diferencia.</p><p><strong>Más que un ventilador o una linterna, es equipo diseñado para rendir.</strong></p>"
+    }
+  ]
+}

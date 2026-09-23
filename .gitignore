@@ -1,0 +1,7 @@
+sitio/
+node_modules/
+.DS_Store
+Thumbs.db
+_to_delete/
+datos/respaldos/
+Claymore/

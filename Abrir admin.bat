@@ -1,0 +1,11 @@
+@echo off
+title Admin Bajareque Outdoor
+cd /d "%~dp0"
+where node >nul 2>nul
+if errorlevel 1 (
+  echo No se encontro Node.js. Instalalo desde https://nodejs.org y vuelve a intentar.
+  pause
+  exit /b 1
+)
+node admin.mjs
+pause
