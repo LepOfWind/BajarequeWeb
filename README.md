@@ -41,11 +41,12 @@ sitio/                  ← resultado generado (no editar a mano)
 Cloudflare Pages entiende el archivo `_redirects`, que redirige las direcciones viejas de Shopify que ya no existen (`/cart`, `/blogs/noticias`, etc.).
 
 1. Sube esta carpeta a un repositorio de GitHub. Incluye `static/img`.
-2. En Cloudflare, entra a **Workers & Pages → Create → Pages → Connect to Git** y elige el repositorio.
+2. En Cloudflare, entra a **Workers & Pages → Create** e importa el repositorio de GitHub.
 3. Configuración de build:
    - Build command: `node build.mjs`
-   - Build output directory: `sitio`
-4. Cada vez que hagas `git push`, el sitio se vuelve a publicar solo.
+   - Deploy command: `npx wrangler deploy` (el valor por defecto)
+4. El archivo `wrangler.jsonc` le indica a Cloudflare que publique **solo** la carpeta `sitio` (nunca el admin), que use `404.html` y que aplique `_redirects`.
+5. Cada vez que hagas `git push`, o pulses **Publicar** en el admin, el sitio se vuelve a publicar solo.
 
 También puedes subirlo sin GitHub: corre `node build.mjs` y arrastra la carpeta `sitio` en **Pages → Upload assets**.
 
