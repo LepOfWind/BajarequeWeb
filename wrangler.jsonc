@@ -1,0 +1,13 @@
+// Configuración de Cloudflare (Workers con archivos estáticos).
+// El build (node build.mjs) genera ./sitio y SOLO esa carpeta se publica.
+// El panel de administración (admin/) nunca se sube a internet.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bajareque",
+  "compatibility_date": "2026-09-21",
+  "assets": {
+    "directory": "./sitio",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
